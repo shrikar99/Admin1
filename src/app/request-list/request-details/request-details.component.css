@@ -2,3 +2,7 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+select.ng-invalid.ng-touched{
+  border: 1px solid red;
+}

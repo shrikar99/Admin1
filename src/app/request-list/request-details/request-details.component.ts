@@ -4,6 +4,7 @@ import { RequestDataService } from '../../data/data.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-request-details',
@@ -14,6 +15,7 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
   request: RequestDataStore;
   id: string;
   sub: Subscription;
+  status = ['Open', 'In Progress', 'Close'];
   constructor(private requestDataService: RequestDataService, private route: ActivatedRoute, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
@@ -32,6 +34,10 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
         this.request = this.requestDataService.getRequest(this.id);
       });
 
+  }
+
+  onDetailSubmit(detailForm: NgForm){
+     console.log(detailForm.value.requestStatus+ ','+ detailForm.value.requestAssignTo + ', '+detailForm.value.requestComment);
   }
 
   onCancel(){

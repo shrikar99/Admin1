@@ -1,18 +1,27 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6" style="padding: 2rem; border-radius: .5rem; background-color: rgb(186, 232, 247);">
-        <form>
+        <form #detailForm = "ngForm" (ngSubmit)="onDetailSubmit(detailForm)">
             <div class="row" style="margin-bottom: 1rem;">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="ID">Request ID:</label>
-                  <input type="text" class="form-control" id="ID" value="{{request.requestId}}" disabled>
+                  <input type="text"
+                  class="form-control"
+                  id="ID"
+                  value="{{request.requestId}}"
+                   readonly>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="department">Department</label>
-                  <input type="text" class="form-control" id="department" value="{{request.requestDepartment}}" disabled>
+                  <input
+                   type="text"
+                   class="form-control"
+                   id="department"
+                   value="{{request.requestDepartment}}"
+                   readonly>
                 </div>
               </div>
           </div>
@@ -21,13 +30,23 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="requestCategory">Request Category:</label>
-                <input type="text" class="form-control" id="requestCategory" value="{{request.requestCategory}}" disabled>
+                <input
+                type="text"
+                class="form-control"
+                id="requestCategory"
+                value="{{request.requestCategory}}"
+                readonly>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="requestSubCategory">Request Sub Category:</label>
-                <input type="text" class="form-control" id="requestSubCategory" value="{{request.requestSubCategory}}" disabled>
+                <input
+                type="text"
+                 class="form-control"
+                 id="requestSubCategory"
+                 value="{{request.requestSubCategory}}"
+                 readonly>
               </div>
             </div>
         </div>
@@ -36,7 +55,14 @@
           <div class="col-12">
             <div class="form-group">
               <label for="requestSummary">Summary</label>
-              <textarea name="requestSummary" id="requestSummary" cols="30" rows="4" style="width: 100%;" disabled>{{request.requestSummary}}</textarea>
+              <textarea
+              class="form-control"
+              id="requestSummary"
+              cols="30"
+              rows="4"
+              style="width: 100%;"
+             readonly
+               >{{request.requestSummary}}</textarea>
             </div>
           </div>
         </div>
@@ -44,31 +70,31 @@
 
         <div class="row" style="margin-bottom: 1rem;">
           <div class="col-md-6">
-              <fieldset class="form-group">
-                  <legend class="col-form-label" required>Status:</legend>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" style="cursor:pointer;">
-                    <label class="form-check-label" for="exampleRadios1">
-                      In Progress
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" style="cursor:pointer;">
-                    <label class="form-check-label" for="exampleRadios2">
-                      Close
-                    </label>
-                  </div>
-              </fieldset>
+            <label>Select Status<span class="text-danger">*</span></label>
+              <div class="radio" *ngFor="let requestStatus of status">
+                <label>
+                  <input type="radio"
+                  name="requestStatus"
+                  ngModel
+                  [value]="requestStatus"
+                  required> {{requestStatus}}
+                </label>
+              </div>
           </div>
           <div class="col-md-6">
-            <legend class="col-form-label" required>Assign To:</legend>
-              <select class="form-control">
-                <option default>--Select Employee Here --</option>
+            <legend class="col-form-label" required>Assign To<span class="text-danger">*</span></legend>
+              <select class="form-control"
+              ngModel
+              name="requestAssignTo"
+              #empSel="ngModel"
+              required>
+                <option>--Select Employee Here --</option>
                 <option >Employee XYZ [12345]</option>
                 <option >Employee XYZ [12345]</option>
                 <option >Employee XYZ [12345]</option>
                 <option >Employee XYZ [12345]</option>
               </select>
+              <span class="help-block text-danger" *ngIf="!empSel.valid && empSel.touched"><p>Please Select Employee from the above list!!</p></span>
           </div>
         </div>
 
@@ -76,15 +102,27 @@
           <div class="form-group">
             <div class="form-group">
               <label for="comment">Comment:</label>
-              <textarea name="comment" id="comment" cols="30" rows="4" style="width: 100%;" placeholder="Type a Comment here If any!"></textarea>
+              <textarea
+              class="form-control"
+              id="comment"
+              cols="30"
+              rows="4"
+              style="width: 100%;"
+              ngModel
+              name="requestComment"
+              placeholder="Type a Comment here If any!"
+              ></textarea>
             </div>
           </div>
         </div>
+        <span class="help-block text-danger" *ngIf="!detailForm.valid">
+          <p>Please Select Mandatory Fields!!</p>
+          </span>
         <hr>
         <div class="row" >
           <div class="col-md-6" >
             <div class="form-group">
-              <button type="submit" class="btn btn-success mr-2 mb-2" style="width: 100%;">Save</button>
+              <button type="submit" class="btn btn-success mr-2 mb-2" style="width: 100%;" [disabled]="!detailForm.valid">Save</button>
             </div>
           </div>
           <div class="col-md-6">
