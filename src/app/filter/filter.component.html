@@ -1,0 +1,66 @@
+
+  <hr>
+  <div class="container bg-dark text-light">
+    <div class="row">
+      <div class="col-xs-12 m-4">
+          <h5>Filter By:</h5>
+          <form>
+            <div class="btn-group">
+              <div ngbDropdown class="d-inline-block ml-3">
+                <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Department</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem>IT</button>
+                  <button ngbDropdownItem>Finance</button>
+                  <button ngbDropdownItem>Admin</button>
+                  <button ngbDropdownItem>Other</button>
+                </div>
+              </div>
+                <div ngbDropdown class="d-inline-block ml-3">
+                  <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Category</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem>Hardware</button>
+                    <button ngbDropdownItem>Software</button>
+                    <button ngbDropdownItem>Travel Booking</button>
+                    <button ngbDropdownItem>Salary Issue</button>
+                  </div>
+                </div>
+                  <div ngbDropdown class="d-inline-block ml-3">
+                    <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Sub Category</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem>Laptop</button>
+                      <button ngbDropdownItem>Mouse</button>
+                      <button ngbDropdownItem>Keyboard</button>
+                      <button ngbDropdownItem>International Travel Ticket</button>
+                      <button ngbDropdownItem>Salary Issue</button>
+
+                    </div>
+                  </div>
+                    <div ngbDropdown class="d-inline-block ml-3">
+                      <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Status</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>Open</button>
+                        <button ngbDropdownItem>In Progress</button>
+                        <button ngbDropdownItem>Close</button>
+                      </div>
+                    </div>
+                      <div ngbDropdown class="d-inline-block ml-3">
+                        <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Type</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button ngbDropdownItem>Issue</button>
+                          <button ngbDropdownItem>Other</button>
+                        </div>
+                      </div>
+          </div>
+
+        <div class="float-right">
+           <button type="submit" class="btn btn-success mr-4" (click)="onApply()">Apply</button>
+           <button type="button" class="btn btn-danger mr-4" (click)="onCancel()">Cancel</button>
+        </div>
+
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+

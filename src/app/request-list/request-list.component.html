@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Request ID</th>
+          <th scope="col">Department</th>
+          <th scope="col">Request Category</th>
+          <th scope="col">Request Sub Category</th>
+          <th scope="col">Request Type</th>
+          <th scope="col">Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let request of requestList">
+            <th scope="row"><button type="button" class="btn btn-outline-success" (click)="onRequestSelect(request)">{{request.requestId}}</button></th>
+            <td>{{request.requestDepartment}}</td>
+            <td>{{request.requestCategory}}</td>
+            <td>{{request.requestSubCategory}}</td>
+            <td>{{request.requestType}}</td>
+            <td style="cursor: pointer;">
+                  {{request.requestSummary | summaryShorten}}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+

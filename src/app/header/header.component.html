@@ -1,0 +1,13 @@
+
+<nav class="navbar navbar-dark bg-dark text-light">
+  <a class="navbar-brand" (click)="onClickLogo()" style="margin-left: 3rem; cursor: pointer;">
+    <img src="../../assets/logo/SE2.png" width="80" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+  </a>
+
+  <form style="margin-right: 3rem;">
+    <button type="menu" class="btn btn-info" style="margin-right: 2rem;" (click)="selectFilter()" [disabled]="requestDataService.filterDisabled">Filter</button>
+    <button type="button" class="btn btn-danger"> Logout </button>
+  </form>
+</nav>
+
+<app-filter *ngIf="isFilterSelected"></app-filter>
