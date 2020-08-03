@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppComponent } from './app.component';
 import { RequestDataService} from './data/data.service';
@@ -38,7 +39,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
     // AppRoutingModule
   ],
   providers: [

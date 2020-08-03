@@ -37,6 +37,7 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
   }
 
   onDetailSubmit(detailForm: NgForm){
+    //got data here
      console.log(detailForm.value.requestStatus+ ','+ detailForm.value.requestAssignTo + ', '+detailForm.value.requestComment);
      this.router.navigate(['/']);
      detailForm.reset();

@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { RequestDataService } from '../data/data.service';
 import { RequestDataStore } from '../data/data.model';
 import { Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner'
 
 @Component({
   selector: 'app-request-list',
@@ -13,7 +14,7 @@ export class RequestListComponent implements OnInit {
 
   requestList: RequestDataStore[] = [];
   selectedRequest: RequestDataStore;
-  constructor(private requestDataService: RequestDataService, private router: Router) {
+  constructor(private requestDataService: RequestDataService, private router: Router, private spinnerService: NgxSpinnerService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
@@ -26,7 +27,9 @@ export class RequestListComponent implements OnInit {
   }
 
   getRequests(){
+    this.spinnerService.show();
    this.requestList = this.requestDataService.getRequests();
+    this.spinnerService.hide();
   }
 
   onRequestSelect(request: RequestDataStore){
