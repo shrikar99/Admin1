@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router} from '@angular/router';
 import { RequestDataService } from '../data/data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +17,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onClickLogo(){
-    this.router.navigate(['/dashboard']);
+    this.requestDataService.requestList = this.requestDataService.requestData;
+    this.router.navigate(['/']);
   }
 
   selectFilter(){
     this.isFilterSelected = !this.isFilterSelected;
+    this.router.navigate(['/dashboard/filter']);
   }
 
 }

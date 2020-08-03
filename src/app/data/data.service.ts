@@ -1,7 +1,9 @@
 import { RequestDataStore } from './data.model';
+import { FilterService } from '../filter/filter.service';
 
 export class RequestDataService{
   filterDisabled = false;
+
     requestData: RequestDataStore[] = [
       {
         requestId: '1234567890',
@@ -33,7 +35,7 @@ export class RequestDataService{
       {
         requestId: '4567890123',
         requestDepartment: 'IT',
-        requestCategory: 'Hardware',
+        requestCategory: 'Software',
         requestSubCategory: 'Keyboard',
         requestType: 'Issue',
         requestStatus: 'Open',
@@ -59,9 +61,13 @@ export class RequestDataService{
       },
     ];
 
+    requestList: RequestDataStore[] = this.requestData;
+
+
     getRequests(){
-      return this.requestData;
+      return this.requestList;
     }
+
 
     getRequest(id: string){
             return this.requestData.find(req => req.requestId === id );

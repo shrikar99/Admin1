@@ -13,7 +13,11 @@ export class RequestListComponent implements OnInit {
 
   requestList: RequestDataStore[] = [];
   selectedRequest: RequestDataStore;
-  constructor(private requestDataService: RequestDataService, private router: Router) {}
+  constructor(private requestDataService: RequestDataService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+  }
 
   ngOnInit(): void {
    this.selected = false;

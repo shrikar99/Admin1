@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path: 'dashboard', component: RequestListComponent},
+    {path: 'dashboard/filter', component: FilterComponent},
     {path: 'dashboard/detail/:id', component: RequestDetailsComponent},
     {path: '**', component: PageNotFoundComponent}
 

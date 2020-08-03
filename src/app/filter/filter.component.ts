@@ -1,34 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import {FilterService} from './filter.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-  selDepartment: string;
-  selCategory: string;
-  selSubCategory: string;
-  selStatus: string;
-  selType: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private filterService: FilterService) { }
 
   ngOnInit(): void {
   }
 
   onCancel(){
-
+      this.router.navigate(['/dashboard']);
   }
 
   onFilterSubmit(filterForm: NgForm){
-      this.selDepartment = filterForm.value.department;
-      this.selCategory = filterForm.value.category;
-      this.selSubCategory = filterForm.value.subCategory;
-      this.selStatus = filterForm.value.status;
-      this.selType = filterForm.value.type;
-      console.log(this.selDepartment + ', ' + this.selCategory + ', ' + this.selSubCategory + ', ' +this.selStatus + ', '+this.selType);
+    this.filterService.filterValues( filterForm.value.department,
+      filterForm.value.category,
+      filterForm.value.subCategory,
+        filterForm.value.status,
+      filterForm.value.type);
+
+      this.router.navigate(['/']);
   }
 
 }
