@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FilterComponent } from './filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './footer/footer.component';
 // import { AppRoutingModule } from './app-routing.module'
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
     SummaryShortenPipe,
     RequestDetailsComponent,
     PageNotFoundComponent,
-    FilterComponent
+    FilterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
