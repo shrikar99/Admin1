@@ -11,7 +11,7 @@ import {NgxSpinnerService} from 'ngx-spinner'
 })
 export class RequestListComponent implements OnInit {
   selected = false;
-
+  view: string = "Table";
   requestList: RequestDataStore[] = [];
   selectedRequest: RequestDataStore;
   constructor(private requestDataService: RequestDataService, private router: Router, private spinnerService: NgxSpinnerService) {
@@ -36,6 +36,10 @@ export class RequestListComponent implements OnInit {
     this.selected= true;
     this.selectedRequest = request;
     this.router.navigate(['dashboard/detail', this.selectedRequest.requestId]);
+  }
+
+  onSwitchView(){
+    this.view === "Table" ? this.view = "Card" : this.view = "Table";
   }
 
 }

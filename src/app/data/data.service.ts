@@ -1,9 +1,7 @@
 import { RequestDataStore } from './data.model';
-import { FilterService } from '../filter/filter.service';
 
 export class RequestDataService{
   filterDisabled = false;
-
     requestData: RequestDataStore[] = [
       {
         requestId: '1234567890',

@@ -1,31 +1,50 @@
+
 <div class="container">
   <div class="row">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Request ID</th>
-          <th scope="col">Department</th>
-          <th scope="col">Request Category</th>
-          <th scope="col">Request Sub Category</th>
-          <th scope="col">Request Type</th>
-          <th scope="col">Summary</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let request of requestList">
-            <th scope="row"><button type="button" class="btn btn-outline-success" (click)="onRequestSelect(request)">{{request.requestId}}</button></th>
-            <td>{{request.requestDepartment}}</td>
-            <td>{{request.requestCategory}}</td>
-            <td>{{request.requestSubCategory}}</td>
-            <td>{{request.requestType}}</td>
-            <td style="cursor: pointer;">
-                {{request.requestSummary | summaryShorten}}
-
-            </td>
+    <div *ngIf="view === 'Table'">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Request ID</th>
+            <th scope="col">Department</th>
+            <th scope="col">Request Category</th>
+            <th scope="col">Request Sub Category</th>
+            <th scope="col">Request Type</th>
+            <th scope="col">Summary</th>
           </tr>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+            <tr *ngFor="let request of requestList">
+              <th scope="row"><button type="button" class="btn btn-outline-success" (click)="onRequestSelect(request)">{{request.requestId}}</button></th>
+              <td>{{request.requestDepartment}}</td>
+              <td>{{request.requestCategory}}</td>
+              <td>{{request.requestSubCategory}}</td>
+              <td>{{request.requestType}}</td>
+              <td style="cursor: pointer;">
+                  {{request.requestSummary | summaryShorten}}
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row" *ngIf="view === 'Card'">
+      <div class="col-xs-12 col-md-4" *ngFor="let request of requestList">
+        <div class="card text-white bg-dark mb-3" style="max-width: 25rem; height: 25rem; cursor: pointer;" (click)="onRequestSelect(request)" >
+          <div class="card-header"><strong>Department: </strong>{{request.requestDepartment}}</div>
+          <div class="card-body bg-light text-dark">
+            <h5 class="card-title"><strong>Request ID: </strong>{{request.requestId}}</h5>
+            <hr>
+            <p class="card-text"><strong>Category: </strong>{{request.requestCategory}}</p>
+            <p class="card-text"><strong>Sub Category: </strong>{{request.requestSubCategory}}</p>
+            <p class="card-text"><strong>Type: </strong>{{request.requestType}}</p>
+            <p class="card-text"><strong>Summary: </strong>{{request.requestSummary}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
 
+<div class="fixed-bottom"><button class="btn btn-secondary btn-small" (click)="onSwitchView()">Switch View</button></div>

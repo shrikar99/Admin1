@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router} from '@angular/router';
 import { RequestDataService } from '../data/data.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
