@@ -14,13 +14,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FilterComponent } from './filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http'
 // import { AppRoutingModule } from './app-routing.module'
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path: 'dashboard', component: RequestListComponent},
     {path: 'dashboard/filter', component: FilterComponent},
-    {path: 'dashboard/detail/:id', component: RequestDetailsComponent},
+    {path: 'detail/:id', component: RequestDetailsComponent},
     {path: '**', component: PageNotFoundComponent}
 
 ];
@@ -42,7 +43,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
     // AppRoutingModule
   ],
   providers: [

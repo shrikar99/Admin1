@@ -9,11 +9,10 @@ import { RequestDataStore } from './data/data.model';
 })
 export class AppComponent implements OnInit{
 
-  requests: RequestDataStore[] = [];
   constructor(private requestDataService: RequestDataService){}
 
   ngOnInit(){
-     this.requests = this.requestDataService.requestData;
+     this.requestDataService.getRequests();
   }
 
 }

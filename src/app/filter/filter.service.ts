@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import {RequestDataService} from '../data/data.service'
+import {RequestListService} from '../request-list/request-list.service';
 import { RequestDataStore } from '../data/data.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService{
-  constructor(private requestDataService: RequestDataService) { }
+  isFilterSelected = false;
 
-  requests: RequestDataStore[] = this.requestDataService.requestData;
+  constructor(private requestListService: RequestListService) { }
+  requests: RequestDataStore[];
   filteredRequests: RequestDataStore[];
 
   filterValues( filterDepartment: string,
@@ -16,9 +17,10 @@ export class FilterService{
     filterSubCategory: string,
     filterStatus: string,
     filterType: string){
+      this.requests = this.requestListService.requests;
             this.filteredRequests = this.requests;
               if(filterDepartment !== ''){
-                this.filteredRequests = this.requests.filter(req => req.requestDepartment=== filterDepartment);
+                this.filteredRequests = this.filteredRequests.filter(req => req.requestDepartment === filterDepartment);
               }else{
                 this.filteredRequests = this.requests;
               }
@@ -34,8 +36,8 @@ export class FilterService{
               if(filterType !== ''){
                 this.filteredRequests = this.filteredRequests.filter(req => req.requestType === filterType);
               }
-         this.requestDataService.requestList = this.filteredRequests;
-         this.filteredRequests = this.requests;
+         this.requestListService.requestList = this.filteredRequests;
+         this.filteredRequests = this.requestListService.requests;
     }
 
 }

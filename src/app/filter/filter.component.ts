@@ -15,7 +15,8 @@ export class FilterComponent implements OnInit {
   }
 
   onCancel(){
-      this.router.navigate(['/dashboard']);
+    this.filterService.isFilterSelected = false;
+       this.router.navigate(['/dashboard']);
   }
 
   onFilterSubmit(filterForm: NgForm){
@@ -25,6 +26,8 @@ export class FilterComponent implements OnInit {
         filterForm.value.status,
       filterForm.value.type);
 
+
+      this.filterService.isFilterSelected = false;
       this.router.navigate(['/']);
   }
 

@@ -1,5 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import { RequestDataService } from '../data/data.service';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { RequestListService } from '../request-list/request-list.service';
 import { RequestDataStore } from '../data/data.model';
 import { Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner'
@@ -9,12 +9,13 @@ import {NgxSpinnerService} from 'ngx-spinner'
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.css']
 })
-export class RequestListComponent implements OnInit {
+export class RequestListComponent implements OnInit, OnDestroy {
   selected = false;
   view: string = "Table";
-  requestList: RequestDataStore[] = [];
+
+  requestList: RequestDataStore[];
   selectedRequest: RequestDataStore;
-  constructor(private requestDataService: RequestDataService, private router: Router, private spinnerService: NgxSpinnerService) {
+  constructor(private requestListService: RequestListService, private router: Router, private spinnerService: NgxSpinnerService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
@@ -22,20 +23,17 @@ export class RequestListComponent implements OnInit {
 
   ngOnInit(): void {
    this.selected = false;
-    console.log('dashboard called');
-    this.getRequests();
+   this.requestList = this.requestListService.getRequests();
   }
 
-  getRequests(){
-    this.spinnerService.show();
-   this.requestList = this.requestDataService.getRequests();
-    this.spinnerService.hide();
+  ngOnDestroy(){
   }
+
 
   onRequestSelect(request: RequestDataStore){
     this.selected= true;
     this.selectedRequest = request;
-    this.router.navigate(['dashboard/detail', this.selectedRequest.requestId]);
+    this.router.navigate(['detail', this.selectedRequest.requestId]);
   }
 
   onSwitchView(){

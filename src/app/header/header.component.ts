@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router} from '@angular/router';
-import { RequestDataService } from '../data/data.service';
+import { RequestListService } from '../request-list/request-list.service';
+import { FilterService } from '../filter/filter.service';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +9,19 @@ import { RequestDataService } from '../data/data.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  isFilterSelected = false;
-  constructor(private router: Router, public requestDataService: RequestDataService) { }
+  constructor(private router: Router, public requestListService: RequestListService, public filterService: FilterService) { }
 
   ngOnInit(): void {
-    this.isFilterSelected = false;
+    this.filterService.isFilterSelected = false;
   }
 
   onClickLogo(){
-    this.requestDataService.requestList = this.requestDataService.requestData;
+    this.requestListService.requestList = this.requestListService.requests;
     this.router.navigate(['/']);
   }
 
   selectFilter(){
-    this.isFilterSelected = !this.isFilterSelected;
+    this.filterService.isFilterSelected = !this.filterService.isFilterSelected;
     this.router.navigate(['/dashboard/filter']);
   }
 

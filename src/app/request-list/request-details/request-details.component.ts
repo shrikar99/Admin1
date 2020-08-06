@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { RequestDataStore } from '../../data/data.model';
-import { RequestDataService } from '../../data/data.service';
+import { RequestListService } from '../request-list.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { timeInterval } from 'rxjs/operators';
 
 @Component({
   selector: 'app-request-details',
@@ -16,22 +17,22 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
   id: string;
   sub: Subscription;
   status = ['Open', 'In Progress', 'Close'];
-  constructor(private requestDataService: RequestDataService, private route: ActivatedRoute, private router: Router, private location: Location) { }
+  constructor(private requestListService: RequestListService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.requestDataService.filterDisabled = true;
+    this.requestListService.filterDisabled = true;
      this.getRequest();
   }
 
   ngOnDestroy(){
-    this.requestDataService.filterDisabled = false;
+    this.requestListService.filterDisabled = false;
   }
 
   getRequest(){
     this.sub = this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
-        this.request = this.requestDataService.getRequest(this.id);
+       this.request = this.requestListService.getRequest(this.id);
       });
 
   }
@@ -39,8 +40,8 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
   onDetailSubmit(detailForm: NgForm){
     //got data here
      console.log(detailForm.value.requestStatus+ ','+ detailForm.value.requestAssignTo + ', '+detailForm.value.requestComment);
-     this.router.navigate(['/']);
      detailForm.reset();
+     this.router.navigate(['/']);
   }
 
   onCancel(){
