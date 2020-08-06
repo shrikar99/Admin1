@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestDataService } from './data/data.service';
-import { RequestDataStore } from './data/data.model';
+import {EmployeeDataService} from './data/employee-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,11 @@ import { RequestDataStore } from './data/data.model';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private requestDataService: RequestDataService){}
+  constructor(private requestDataService: RequestDataService, private employeeDataService: EmployeeDataService){}
 
   ngOnInit(){
      this.requestDataService.getRequests();
+     this.employeeDataService.getEmployees();
   }
 
 }

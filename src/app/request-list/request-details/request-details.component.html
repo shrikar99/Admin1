@@ -88,11 +88,7 @@
               name="requestAssignTo"
               #empSel="ngModel"
               required>
-                <option>--Select Employee Here --</option>
-                <option >Employee XYZ [12345]</option>
-                <option >Employee XYZ [12345]</option>
-                <option >Employee XYZ [12345]</option>
-                <option >Employee XYZ [12345]</option>
+                <option *ngFor="let emp of employeeList" value="{{emp.id}}">{{emp.firstName}} {{emp.lastName}} - {{emp.id}}</option>
               </select>
               <span class="help-block text-danger" *ngIf="!empSel.valid && empSel.touched"><p>Please Select Employee from the above list!!</p></span>
           </div>
