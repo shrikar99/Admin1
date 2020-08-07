@@ -69,7 +69,7 @@
         <hr>
 
         <div class="row" style="margin-bottom: 1rem;">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label>Select Status<span class="text-danger">*</span></label>
               <div class="radio" *ngFor="let requestStatus of status">
                 <label>
@@ -81,14 +81,14 @@
                 </label>
               </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <legend class="col-form-label" required>Assign To<span class="text-danger">*</span></legend>
               <select class="form-control"
               ngModel
               name="requestAssignTo"
               #empSel="ngModel"
               required>
-                <option *ngFor="let emp of employeeList" value="{{emp.id}}">{{emp.firstName}} {{emp.lastName}} - {{emp.id}}</option>
+                <option *ngFor="let emp of employeeList" value="{{emp.id}}">{{emp.id}} - {{emp.firstName}} {{emp.lastName}} [{{emp.emailId}}] </option>
               </select>
               <span class="help-block text-danger" *ngIf="!empSel.valid && empSel.touched"><p>Please Select Employee from the above list!!</p></span>
           </div>
