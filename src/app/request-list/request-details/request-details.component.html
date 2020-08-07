@@ -54,7 +54,7 @@
         <div class="row justify-content-center" style="margin-bottom: 1rem;">
           <div class="col-12">
             <div class="form-group">
-              <label for="requestSummary">Summary</label>
+              <label for="requestSummary">Summary:</label>
               <textarea
               class="form-control"
               id="requestSummary"
@@ -74,8 +74,8 @@
               <div class="radio" *ngFor="let requestStatus of status">
                 <label>
                   <input type="radio"
-                  name="requestStatus"
                   ngModel
+                  name="requestStatus"
                   [value]="requestStatus"
                   required> {{requestStatus}}
                 </label>
@@ -97,7 +97,7 @@
         <div class="row" style="margin-bottom: 2rem;">
           <div class="form-group">
             <div class="form-group">
-              <label for="comment">Comment:</label>
+              <label for="comment">Comment<span class="text-danger">*</span></label>
               <textarea
               class="form-control"
               id="comment"
@@ -107,7 +107,7 @@
               ngModel
               name="requestComment"
               placeholder="Type a Comment here If any!"
-              ></textarea>
+              required></textarea>
             </div>
           </div>
         </div>

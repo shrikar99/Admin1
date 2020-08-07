@@ -3,6 +3,7 @@ import { EmployeeData } from '../../data/employee-data.model';
 import { RequestListService } from '../request-list.service';
 import { RequestDataStore } from 'src/app/data/data.model';
 import { HttpClient } from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,22 @@ export class RequestDetailService{
     this.requestUpdate = this.requestListService.requests.find(req => req.requestId === selectedRequestId);
     this.requestUpdate.requestStatus = status;
     this.requestUpdate.assignedEmpId = empId;
-
-    this.http.put('https://localhost:44355/api/UpdateRequest'+ {selectedRequestId}, this.requestUpdate).subscribe(() => {console.log('request Updated');});
+    const obj = {
+      assignedEmpId: +this.requestUpdate.assignedEmpId,
+      createdEmpId: +this.requestUpdate.createdEmpId,
+      createdOn: this.requestUpdate.createdOn,
+      lastModifiedBy: this.requestUpdate.lastModifiedBy,
+      lastModifiedOn: this.requestUpdate.lastModifiedOn,
+      requestCategory: this.requestUpdate.requestCategory,
+      requestDepartment: this.requestUpdate.requestDepartment,
+      requestId: this.requestUpdate.requestId,
+      requestStatus: this.requestUpdate.requestStatus,
+      requestSubCategory: this.requestUpdate.requestSubCategory,
+      requestSummary: this.requestUpdate.requestSummary,
+      requestType: this.requestUpdate.requestType,
+      title: this.requestUpdate.title,
+      comment: comment
+    }
+    this.http.put('https://localhost:44355/api/request/UpdateRequest/'+ selectedRequestId, obj).subscribe();
   }
 }

@@ -17,7 +17,7 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
   id: string;
   sub: Subscription;
   employeeList: EmployeeData [];
-  status = ['Open', 'In Progress', 'Close'];
+  status = ['Open', 'InProgress', 'Close'];
   constructor(private requestListService: RequestListService, private route: ActivatedRoute, private router: Router, private requestDetailService: RequestDetailService) { }
 
   ngOnInit(): void {

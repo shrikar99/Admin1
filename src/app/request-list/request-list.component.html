@@ -10,6 +10,7 @@
             <th scope="col">Request Category</th>
             <th scope="col">Request Sub Category</th>
             <th scope="col">Request Type</th>
+            <th scope="col">Request Status</th>
             <th scope="col">Summary</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
               <td>{{request.requestCategory}}</td>
               <td>{{request.requestSubCategory}}</td>
               <td>{{request.requestType}}</td>
+              <td>{{request.requestStatus}}</td>
               <td style="cursor: pointer;">
                   {{request.requestSummary | summaryShorten}}
               </td>
@@ -46,5 +48,8 @@
 
   </div>
 </div>
-
-<button class="btn btn-secondary btn-small" (click)="onSwitchView()">Switch View</button>
+<div class="container">
+  <div class="row ">
+    <button class="btn btn-block btn-lg btn-secondary btn-small" (click)="onSwitchView()">Switch View</button>
+  </div>
+</div>
