@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { RequestListService } from '../request-list/request-list.service';
 import { RequestDataStore } from '../data/data.model';
 import { Router} from '@angular/router';
-import {NgxSpinnerService} from 'ngx-spinner'
+import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-request-list',
@@ -11,22 +12,33 @@ import {NgxSpinnerService} from 'ngx-spinner'
 })
 export class RequestListComponent implements OnInit, OnDestroy {
   selected = false;
+  isFilterSelected = false;
+  inProgress: RequestDataStore[];
+  open: RequestDataStore[];
+  closed: RequestDataStore[];
+  totlecount = 0;
   view: string = "Table";
-
+  sub: Subscription;
   requestList: RequestDataStore[];
   selectedRequest: RequestDataStore;
-  constructor(private requestListService: RequestListService, private router: Router, private spinnerService: NgxSpinnerService) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+  constructor(private requestListService: RequestListService, private router: Router) {
   }
 
   ngOnInit(): void {
    this.selected = false;
-   this.requestList = this.requestListService.getRequests();
+   this.sub = this.requestListService.getRequests().subscribe(Response => {
+    this.requestList = Response;
+    this.totlecount = this.requestList.length;
+    this.requestListService.requests = Response;
+    this.inProgress = Response.filter(req=> req.requestStatus === "InProgress");
+    this.open = Response.filter(req=> req.requestStatus === "Open      ");
+    this.closed = Response.filter(req=> req.requestStatus === "Close     ");
+
+  });
   }
 
   ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
 
@@ -38,6 +50,43 @@ export class RequestListComponent implements OnInit, OnDestroy {
 
   onSwitchView(){
     this.view === "Table" ? this.view = "Card" : this.view = "Table";
+    this.ngOnInit();
   }
 
+  selectFilter(){
+    this.isFilterSelected = !this.isFilterSelected;
+  }
+
+  onCancelFilter(){
+    this.isFilterSelected = !this.isFilterSelected;
+  }
+
+  onFilterSubmit(filterForm: NgForm){
+    this.requestListService.filterValues( filterForm.value.department,
+      filterForm.value.category,
+      filterForm.value.subCategory,
+        filterForm.value.status,
+      filterForm.value.type);
+
+      this.requestList = this.requestListService.filteredRequests;
+      this.isFilterSelected = false;
+    }
+
+    onClickOpen(){
+      this.requestList = this.open;
+    }
+    onClickTotle(){
+       this.requestList = this.requestListService.requests;
+    }
+    onClickClosed(){
+       this.requestList = this.closed;
+    }
+    onClickInProgress(){
+       this.requestList = this.inProgress;
+    }
+
+    onReload(){
+      this.isFilterSelected = false;
+      this.ngOnInit();
+    }
 }

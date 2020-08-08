@@ -3,7 +3,9 @@ import { EmployeeData } from '../../data/employee-data.model';
 import { RequestListService } from '../request-list.service';
 import { RequestDataStore } from 'src/app/data/data.model';
 import { HttpClient } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
+import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +13,34 @@ import { stringify } from '@angular/compiler/src/util';
 export class RequestDetailService{
   employees: EmployeeData [];
   requestUpdate: RequestDataStore;
+  rootURL = 'https://localhost:44355/api/request';
   constructor(private requestListService: RequestListService, private http: HttpClient){}
   setEmployees(emp: EmployeeData []){
       this.employees =emp;
   }
 
-  getEmployeesByDepartment(department: string){
-    return this.employees.find(emp => emp.department === department);
+
+  getEmployees(): Observable<EmployeeData []>{
+    return this.http.get<EmployeeData []>('https://localhost:44355/api/employee/getallemployees').pipe(
+      map(Response => {
+        const emp: EmployeeData [] = [];
+        for(const key in Response){
+          emp.push({...Response[key]});
+        }
+        return emp;
+      }));
+ }
+
+  getRequest(id: string): Observable<RequestDataStore>{
+    return this.http.get<RequestDataStore>(this.rootURL+"/SingleRequest/"+id).pipe(
+      map(Response => {
+        const req: RequestDataStore = Response;
+        console.log(req);
+        return req;
+      })
+    );
   }
+
 
   updateRequest(selectedRequestId: string, status: string, empId: number , comment: string){
 
@@ -41,6 +63,6 @@ export class RequestDetailService{
       title: this.requestUpdate.title,
       comment: comment
     }
-    this.http.put('https://localhost:44355/api/request/UpdateRequest/'+ selectedRequestId, obj).subscribe();
+    this.http.put(this.rootURL +'/UpdateRequest/'+ selectedRequestId, obj).subscribe();
   }
 }

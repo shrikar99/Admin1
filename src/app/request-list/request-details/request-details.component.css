@@ -6,3 +6,9 @@
 select.ng-invalid.ng-touched{
   border: 1px solid red;
 }
+
+.formStyle{
+  padding: 2rem;
+  background-color: rgb(164, 198, 230);
+  border-radius: 0.5rem;
+}

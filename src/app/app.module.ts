@@ -4,23 +4,19 @@ import { NgModule } from '@angular/core';
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppComponent } from './app.component';
-import { RequestDataService} from './data/data.service';
 import { HeaderComponent } from './header/header.component';
 import { RequestListComponent } from './request-list/request-list.component';
 import { SummaryShortenPipe } from '../app/request-list/summaryShorten.pipe';
 import { RequestDetailsComponent } from './request-list/request-details/request-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { FilterComponent } from './filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http'
-// import { AppRoutingModule } from './app-routing.module'
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path: 'dashboard', component: RequestListComponent},
-    {path: 'dashboard/filter', component: FilterComponent},
     {path: 'detail/:id', component: RequestDetailsComponent},
     {path: '**', component: PageNotFoundComponent}
 
@@ -35,7 +31,6 @@ const routes: Routes = [
     SummaryShortenPipe,
     RequestDetailsComponent,
     PageNotFoundComponent,
-    FilterComponent,
     FooterComponent
   ],
   imports: [
@@ -45,10 +40,8 @@ const routes: Routes = [
     NgbModule,
     NgxSpinnerModule,
     HttpClientModule
-    // AppRoutingModule
   ],
   providers: [
-    RequestDataService
   ],
   bootstrap: [AppComponent]
 })
